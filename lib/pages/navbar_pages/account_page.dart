@@ -190,7 +190,7 @@ class _AccountState extends State<Account> {
   }
 
   void openLang() {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (_) => const LanguagePage(),

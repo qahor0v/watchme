@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/pages/home_page.dart';
 import 'package:watch_me/pages/login_pages/sign_up.dart';
-import 'package:watch_me/pages/login_pages/sing_in.dart';
+import 'package:watch_me/pages/login_pages/sign_in.dart';
 import 'package:watch_me/pages/login_pages/start_page.dart';
 import 'package:watch_me/pages/lottie_page.dart';
 import 'package:watch_me/pages/navbar_pages/download_page.dart';
