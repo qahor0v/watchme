@@ -233,8 +233,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(8),
                 gradient: LinearGradient(
                   colors: [
-                    const Color(0xffffffff).withOpacity(0.3),
-                    const Color(0xffffffff).withOpacity(0.3),
+                     Colors.red.withOpacity(0.3),
+                     Colors.red.withOpacity(0.3),
+                    //const Color(0xffffffff).withOpacity(0.3),
+                    //const Color(0xffffffff).withOpacity(0.3),
                   ],
                 ),
               ),
@@ -242,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 "Movies".tr(),
                 style: TextStyle(
                   color: categoryIndex == 0
-                      ? const Color(0xff38404b)
+                      ?  Colors.white.withOpacity(0.9)
                       : const Color(0xff38404b).withOpacity(0.6),
                   fontWeight: FontWeight.bold,
                   fontSize: categoryIndex == 0 ? 15 : 14,

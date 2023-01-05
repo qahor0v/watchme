@@ -2,9 +2,12 @@ import 'dart:developer';
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/pages/language_page.dart';
 import 'package:watch_me/pages/login_pages/start_page.dart';
+import 'package:watch_me/providers/history_provider.dart';
+import 'package:watch_me/screens/history_screen.dart';
 
 class Account extends StatefulWidget {
   static const String id = "account_id";
@@ -47,6 +50,7 @@ class _AccountState extends State<Account> {
     // TODO: implement initState
     super.initState();
     userName();
+    context.read<HistoryProvider>().getHistory();
   }
 
   @override
@@ -132,7 +136,7 @@ class _AccountState extends State<Account> {
                     context,
                     "History".tr(),
                     Icons.history,
-                    null,
+                    openHistory,
                   ),
                   widgetTile(
                     height,
@@ -190,10 +194,19 @@ class _AccountState extends State<Account> {
   }
 
   void openLang() {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (_) => const LanguagePage(),
+      ),
+    );
+  }
+
+  void openHistory() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const HistoryScreen(),
       ),
     );
   }

@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:watch_me/models/history_model.dart';
 import 'package:watch_me/models/movie_model.dart';
 import 'package:watch_me/player/player_file.dart';
 import 'package:watch_me/screens/loading_widget.dart';
 import 'package:watch_me/services/preferences_services.dart';
-
 
 class DownloadedItem extends StatelessWidget {
   const DownloadedItem({required this.movie, Key? key}) : super(key: key);
@@ -16,6 +16,14 @@ class DownloadedItem extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
+        var mov = HistoryModel(
+          id: movie.id,
+          name: movie.name,
+          path: movie.path,
+          url: movie.videoUrl,
+          imgUrl: movie.imgUrl,
+          isDownloaded: true,
+        );
         Navigator.push(
           context,
           MaterialPageRoute(

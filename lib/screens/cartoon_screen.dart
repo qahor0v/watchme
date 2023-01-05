@@ -6,8 +6,10 @@ import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:watch_me/models/cartoon_model.dart';
+import 'package:watch_me/models/history_model.dart';
 import 'package:watch_me/models/movie_model.dart';
 import 'package:watch_me/player/player.dart';
+import 'package:watch_me/providers/history_provider.dart';
 import 'package:watch_me/providers/movies_provider.dart';
 import 'package:watch_me/screens/loading_widget.dart';
 
@@ -82,6 +84,15 @@ class _CartoonScreenState extends State<CartoonScreen> {
                         Center(
                           child: GestureDetector(
                             onTap: () {
+                              var mov = HistoryModel(
+                                id: '${widget.cartoon.name}id',
+                                name: widget.cartoon.name,
+                                path: 'null',
+                                url: widget.cartoon.videoUrl,
+                                imgUrl: widget.cartoon.imgUrl,
+                                isDownloaded: false,
+                              );
+                              context.read<HistoryProvider>().onAddHistory(mov);
                               setState(
                                 () {
                                   Navigator.push(

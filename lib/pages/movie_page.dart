@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:watch_me/models/history_model.dart';
 import 'package:watch_me/models/movie_model.dart';
 import 'package:watch_me/player/player.dart';
+import 'package:watch_me/providers/history_provider.dart';
 import 'package:watch_me/providers/movies_provider.dart';
 import 'package:watch_me/screens/loading_widget.dart';
 import 'package:watch_me/screens/movie_screen.dart';
@@ -104,6 +106,14 @@ class _MoviePageState extends State<MoviePage> {
                         Center(
                           child: GestureDetector(
                             onTap: () {
+                              var movie = HistoryModel(
+                                id: widget.movie.id,
+                                name: widget.movie.map['movie']['name'],
+                                path: 'null',
+                                url: widget.movie.map['movie']['videoUrl'],
+                                imgUrl: widget.movie.map['movie']['imgUrl'],
+                                isDownloaded: false,
+                              );
                               setState(
                                 () {
                                   Navigator.push(
@@ -117,6 +127,15 @@ class _MoviePageState extends State<MoviePage> {
                                   );
                                 },
                               );
+                              var mov = HistoryModel(
+                                id: widget.movie.id,
+                                name: widget.movie.map['movie']['name'],
+                                path: 'null',
+                                url: widget.movie.map['movie']['videoUrl'],
+                                imgUrl: widget.movie.map['movie']['imgUrl'],
+                                isDownloaded: false,
+                              );
+                              context.read<HistoryProvider>().onAddHistory(mov);
                             },
                             child: const Icon(
                               IconlyBold.play,
@@ -299,7 +318,7 @@ class _MoviePageState extends State<MoviePage> {
                                     ),
                                   ),
                                   IconButton(
-                                    onPressed: () async  {
+                                    onPressed: () async {
                                       await Share.share(
                                           '${widget.movie.map['movie']['name']} \nYear: ${widget.movie.map['movie']['year']} | Rating: ${widget.movie.map['movie']['rating']}\n\nWatch in WatchMe! \nhttps://fluttuz.t.me');
                                     },
@@ -364,9 +383,8 @@ class _MoviePageState extends State<MoviePage> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        if(context
-                            .watch<MoviesProvider>()
-                            .movies[index].id != widget.movie.id){
+                        if (context.watch<MoviesProvider>().movies[index].id !=
+                            widget.movie.id) {
                           return GestureDetector(
                             onTap: () {
                               Navigator.pushReplacement(
@@ -406,7 +424,7 @@ class _MoviePageState extends State<MoviePage> {
                                         placeholder: (context, url) =>
                                             Loading.loading(),
                                         errorWidget: (context, url, error) =>
-                                        const Icon(
+                                            const Icon(
                                           Icons.movie,
                                           size: 50,
                                           color: Colors.red,
@@ -419,17 +437,19 @@ class _MoviePageState extends State<MoviePage> {
                                     children: [
                                       SizedBox(
                                         height: height * 0.3,
-                                        width: MediaQuery.of(context).size.width *
-                                            0.32,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.32,
                                         child: Column(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.end,
+                                              MainAxisAlignment.end,
                                           //  crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                              const BorderRadius.only(
-                                                bottomRight: Radius.circular(12),
+                                                  const BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(12),
                                                 bottomLeft: Radius.circular(12),
                                               ),
                                               child: BackdropFilter(
@@ -440,7 +460,7 @@ class _MoviePageState extends State<MoviePage> {
                                                 child: Center(
                                                   child: Padding(
                                                     padding:
-                                                    const EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                       left: 3,
                                                       right: 3,
                                                       top: 4,
@@ -448,14 +468,16 @@ class _MoviePageState extends State<MoviePage> {
                                                     ),
                                                     child: Text(
                                                       context
-                                                          .watch<MoviesProvider>()
+                                                          .watch<
+                                                              MoviesProvider>()
                                                           .movies[index]
                                                           .name,
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                         fontWeight:
-                                                        FontWeight.w600,
+                                                            FontWeight.w600,
                                                         fontSize: 15,
                                                       ),
                                                     ),

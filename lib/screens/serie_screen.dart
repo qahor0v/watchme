@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:watch_me/models/history_model.dart';
 import 'package:watch_me/models/serie_model.dart';
 import 'package:watch_me/player/player.dart';
+import 'package:watch_me/providers/history_provider.dart';
 import 'package:watch_me/screens/loading_widget.dart';
 
 class SerieScreen extends StatefulWidget {
@@ -47,7 +50,7 @@ class _SerieScreenState extends State<SerieScreen> {
         actions: [
           IconButton(
             onPressed: () async {
-             await Share.share(
+              await Share.share(
                   '${widget.serie.name} \nYear: ${widget.serie.year} | Rating: ${widget.serie.rating}\n\nWatch in WatchMe! \nhttps://fluttuz.t.me');
             },
             icon: const Icon(
@@ -170,6 +173,15 @@ class _SerieScreenState extends State<SerieScreen> {
               (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
+                    var movie = HistoryModel(
+                      id: "${widget.serie.name}id",
+                      name: "${widget.serie.name} | Chapter $index",
+                      path: 'null',
+                      url: widget.serie.videoUrls[index],
+                      imgUrl: widget.serie.imgUrl,
+                      isDownloaded: false,
+                    );
+                    context.read<HistoryProvider>().onAddHistory(movie);
                     Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -21,12 +21,6 @@ class _LanguagePageState extends State<LanguagePage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-       backgroundColor: Colors.black,
-       shadowColor: Colors.black,
-       title: Text("Language".tr()),
-
-      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -49,33 +43,12 @@ class _LanguagePageState extends State<LanguagePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 8),
-                  widgetTile(
-                    height,
-                    width,
-                    context,
-                    "English",
-                    "assets/icons/en.png",
-                    "en",
-                    "US"
-                  ),
-                  widgetTile(
-                    height,
-                    width,
-                    context,
-                    "Русский",
-                    "assets/icons/ru.png",
-                    "ru",
-                    "BL"
-                  ),
-                  widgetTile(
-                    height,
-                    width,
-                    context,
-                    "O'zbek",
-                    "assets/icons/uz.png",
-                    "uz",
-                    "UZ"
-                  ),
+                  widgetTile(height, width, context, "English",
+                      "assets/icons/en.png", "en", "US"),
+                  widgetTile(height, width, context, "Русский",
+                      "assets/icons/ru.png", "ru", "BL"),
+                  widgetTile(height, width, context, "O'zbek",
+                      "assets/icons/uz.png", "uz", "UZ"),
                 ],
               ),
             ),
@@ -88,14 +61,9 @@ class _LanguagePageState extends State<LanguagePage> {
   Widget widgetTile(double height, double width, BuildContext context,
       String title, icon, String tr, String TR) {
     return GestureDetector(
-      onTap:() {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const HomePage(),
-          ),
-        );
-       context.locale = Locale(tr,TR);
+      onTap: () {
+        Navigator.pushReplacementNamed(context, HomePage.id);
+        context.locale = Locale(tr, TR);
       },
       child: Container(
         margin: const EdgeInsets.only(

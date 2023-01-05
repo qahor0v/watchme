@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:watch_me/pages/login_pages/sign_up.dart';
-import 'package:watch_me/pages/login_pages/sing_in.dart';
+import 'package:watch_me/pages/login_pages/sign_in.dart';
 
 class StartPage extends StatefulWidget {
   static const String id = "StartPage";
