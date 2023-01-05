@@ -175,7 +175,7 @@ class _SerieScreenState extends State<SerieScreen> {
                   onTap: () {
                     var movie = HistoryModel(
                       id: "${widget.serie.name}id",
-                      name: "${widget.serie.name} | Chapter $index",
+                      name: "${widget.serie.name} | Chapter ${index+1}",
                       path: 'null',
                       url: widget.serie.videoUrls[index],
                       imgUrl: widget.serie.imgUrl,

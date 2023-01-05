@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/models/history_model.dart';
@@ -13,6 +12,7 @@ class  HistoryProvider extends ChangeNotifier {
   List<HistoryModel> get history => hs;
 
   Future<void> getHistory() async {
+    hs.clear();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     try {
       final movies = preferences.getStringList('history');
@@ -75,3 +75,5 @@ class  HistoryProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+

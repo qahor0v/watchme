@@ -30,7 +30,7 @@ class DownloadItemScreen extends StatelessWidget {
       height: h * 0.18,
       width: w,
       decoration: BoxDecoration(
-        color: const Color(0xff38404b),
+        color: Colors.white10,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -97,7 +97,7 @@ class DownloadItemScreen extends StatelessWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 backgroundColor: Colors.red,
-                                content: Text('Movie successfully canceled!'),
+                                content: Text('Movie downloading canceled!'),
                               ),
                             );
                           },

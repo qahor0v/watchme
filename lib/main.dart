@@ -12,6 +12,7 @@ import 'package:watch_me/pages/lottie_page.dart';
 import 'package:watch_me/pages/navbar_pages/download_page.dart';
 import 'package:watch_me/pages/navbar_pages/home.dart';
 import 'package:watch_me/pages/navbar_pages/playlist.dart';
+import 'package:watch_me/providers/change_index_provider.dart';
 import 'package:watch_me/providers/history_provider.dart';
 import 'package:watch_me/providers/movies_provider.dart';
 
@@ -33,6 +34,7 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider(create: (context) => MoviesProvider()),
           ChangeNotifierProvider(create: (context) => HistoryProvider()),
+          ChangeNotifierProvider(create: (context) => IndexProvider()),
         ],
         child: const MyApp(),
       ),

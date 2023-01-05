@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/models/movie_model.dart';
 import 'package:watch_me/providers/download_manager.dart';
@@ -55,40 +57,66 @@ class _DownloadPageState extends State<DownloadPage> {
         centerTitle: true,
         backgroundColor: const Color(0xff38404b),
       ),
-      body: StreamBuilder<int>(
-        stream: DownloadManager.instance.onUpdate.stream,
-        builder: (context, snapshot) {
-          log('Progress updated: movie length: ${DownloadManager.instance.movies.length}');
-          return CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return DownloadItemScreen(
-                      movie: DownloadManager.instance.movies[index],
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/images/background.jpg",
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaY: 15,
+            sigmaX: 15,
+          ),
+          child: StreamBuilder<int>(
+            stream: DownloadManager.instance.onUpdate.stream,
+            builder: (context, snapshot) {
+              log('Progress updated: movie length: ${DownloadManager.instance.movies.length}');
+              return movies.isEmpty
+                  ? const Center(
+                      child: Icon(
+                        Icons.not_interested,
+                        color: Colors.white,
+                        size: 70,
+                      ),
+                    )
+                  : CustomScrollView(
+                      slivers: [
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) {
+                              return DownloadItemScreen(
+                                movie: DownloadManager.instance.movies[index],
+                              );
+                            },
+                            childCount: DownloadManager.instance.movies.length,
+                          ),
+                        ),
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) {
+                              return DownloadedItem(
+                                movie: movies[index],
+                              );
+                            },
+                            childCount: movies.length,
+                          ),
+                        ),
+                        const SliverToBoxAdapter(
+                          child: SizedBox(
+                            height: 200,
+                          ),
+                        ),
+                      ],
                     );
-                  },
-                  childCount: DownloadManager.instance.movies.length,
-                ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return DownloadedItem(
-                      movie: movies[index],
-                    );
-                  },
-                  childCount: movies.length,
-                ),
-              ),
-              const SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 200,
-                ),
-              ),
-            ],
-          );
-        },
+            },
+          ),
+        ),
       ),
     );
   }

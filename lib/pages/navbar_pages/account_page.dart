@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/pages/language_page.dart';
 import 'package:watch_me/pages/login_pages/start_page.dart';
+import 'package:watch_me/pages/secret/change_index.dart';
 import 'package:watch_me/providers/history_provider.dart';
 import 'package:watch_me/screens/history_screen.dart';
 
@@ -63,10 +64,11 @@ class _AccountState extends State<Account> {
         width: width,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(
-                "assets/images/background.jpg",
-              ),
-              fit: BoxFit.cover),
+            image: AssetImage(
+              "assets/images/background.jpg",
+            ),
+            fit: BoxFit.cover,
+          ),
         ),
         child: ClipRRect(
           child: BackdropFilter(
@@ -158,6 +160,34 @@ class _AccountState extends State<Account> {
   Widget widgetTile(double height, double width, BuildContext context,
       String title, icon, onTap) {
     return GestureDetector(
+      onLongPress: () {
+        showBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return Center(
+                child: MaterialButton(
+                  onLongPress: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ChangeAppbarIndex(),
+                      ),
+                    );
+                  },
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "WatchMe!",
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 20),
+                  ),
+                ),
+              );
+            });
+      },
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(

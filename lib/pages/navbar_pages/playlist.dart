@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firedart/firedart.dart';
@@ -65,156 +66,186 @@ class _PlaylistPageState extends State<PlaylistPage> {
         centerTitle: true,
         backgroundColor: const Color(0xff38404b),
       ),
-      body: ListView.builder(
-              itemCount: movies.length,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => MoviePage(
-                          movie: movies[index],
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/images/background.jpg",
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+          child: movies.isEmpty
+              ? const Center(
+                  child: Icon(
+                    Icons.not_interested,
+                    color: Colors.white,
+                    size: 70,
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: movies.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => MoviePage(
+                              movie: movies[index],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: h * 0.18,
+                        padding: const EdgeInsets.only(
+                          top: 8,
+                          bottom: 8,
+                          left: 10,
+                          right: 10,
+                        ),
+                        margin: EdgeInsets.only(
+                          left: 12,
+                          right: 12,
+                          top: 16,
+                          bottom: index == movies.length - 1 ? 150 : 0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white10,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: w * 0.25,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: CachedNetworkImage(
+                                  width: w * 0.25,
+                                  height: h * 0.18 - 18,
+                                  // height: h * 0.43,
+                                  // width: w * 0.43,
+                                  fit: BoxFit.cover,
+                                  imageUrl: movies[index].map['movie']
+                                      ['imgUrl'],
+                                  placeholder: (context, url) =>
+                                      Loading.loading(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(
+                                    Icons.movie,
+                                    size: 50,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Flexible(
+                              child: Padding(
+                                padding: const EdgeInsets.only(),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8),
+                                      child: Text(
+                                        movies[index].map['movie']['name'],
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.calendar_month_outlined,
+                                              color: Colors.red,
+                                            ),
+                                            Text(
+                                              movies[index]
+                                                  .map['movie']['year']
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 10),
+                                            const Icon(
+                                              Icons.star,
+                                              color: Colors.red,
+                                            ),
+                                            Text(
+                                              movies[index]
+                                                  .map['movie']['rating']
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                onDelete(
+                                                        movies[index].id, index)
+                                                    .then(
+                                                  (value) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text(
+                                                          'Movie successfully deleted!',
+                                                        ),
+                                                        backgroundColor:
+                                                            Colors.red,
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              icon: const Icon(
+                                                Icons.delete,
+                                                color: Colors.red,
+                                                size: 30,
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     );
                   },
-                  child: Container(
-                    height: h * 0.18,
-                    padding: const EdgeInsets.only(
-                      top: 8,
-                      bottom: 8,
-                      left: 10,
-                      right: 10,
-                    ),
-                    margin: EdgeInsets.only(
-                        left: 12,
-                        right: 12,
-                        top: 16,
-                        bottom: index == movies.length - 1 ? 150 : 0),
-                    decoration: BoxDecoration(
-                      color: const Color(0xff38404b),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: w * 0.25,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: CachedNetworkImage(
-                              width: w * 0.25,
-                              height: h * 0.18-18,
-                              // height: h * 0.43,
-                              // width: w * 0.43,
-                              fit: BoxFit.cover,
-                              imageUrl: movies[index].map['movie']['imgUrl'],
-                              placeholder: (context, url) => Loading.loading(),
-                              errorWidget: (context, url, error) => const Icon(
-                                Icons.movie,
-                                size: 50,
-                                color: Colors.red,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Flexible(
-                          child: Padding(
-                            padding: const EdgeInsets.only(),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: Text(
-                                    movies[index].map['movie']['name'],
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.calendar_month_outlined,
-                                          color: Colors.red,
-                                        ),
-                                        Text(
-                                          movies[index]
-                                              .map['movie']['year']
-                                              .toString(),
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        const Icon(
-                                          Icons.star,
-                                          color: Colors.red,
-                                        ),
-                                        Text(
-                                          movies[index]
-                                              .map['movie']['rating']
-                                              .toString(),
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        IconButton(
-                                          onPressed: () {
-                                            onDelete(movies[index].id, index)
-                                                .then(
-                                              (value) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                    content: Text(
-                                                      'Movie successfully deleted!',
-                                                    ),
-                                                    backgroundColor: Colors.red,
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                          icon: const Icon(
-                                            Icons.delete,
-                                            color: Colors.red,
-                                            size: 30,
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
+                ),
+        ),
+      ),
     );
   }
 }
