@@ -47,7 +47,7 @@ class DownloadedItem extends StatelessWidget {
         height: h * 0.18,
         width: w,
         decoration: BoxDecoration(
-          color: const Color(0xff38404b),
+          color: Colors.white10,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -69,16 +69,18 @@ class DownloadedItem extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     movie.name,
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontSize: 18
                     ),
                   ),
                   Row(
@@ -91,6 +93,7 @@ class DownloadedItem extends StatelessWidget {
                             style: TextStyle(
                               color: Colors.grey,
                               fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
                           ),
                           Icon(
