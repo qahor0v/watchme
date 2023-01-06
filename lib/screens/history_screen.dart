@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:watch_me/providers/history_provider.dart';
@@ -16,7 +17,7 @@ class HistoryScreen extends StatelessWidget {
       backgroundColor: const Color(0xff38404b).withOpacity(0.8),
       appBar: AppBar(
         backgroundColor: const Color(0xff38404b),
-        title: const Text("History"),
+        title: Text("History".tr()),
         actions: [
           IconButton(
             onPressed: () async {
@@ -43,15 +44,7 @@ class HistoryScreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaY: 15, sigmaX: 15),
-          child:context.watch<HistoryProvider>().history.isEmpty?
-          const Center(
-            child: Icon(
-              Icons.not_interested,
-              color: Colors.white,
-              size: 70,
-            ),
-          ):
-          ListView.builder(
+          child: ListView.builder(
             itemBuilder: (context, index) {
               var movie = context.watch<HistoryProvider>().history[index];
               return Container(
@@ -112,9 +105,10 @@ class HistoryScreen extends StatelessWidget {
                                       .onADeleteHistory(movie)
                                       .then((value) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
+                                      SnackBar(
                                         backgroundColor: Colors.red,
-                                        content: Text('Removed from history'),
+                                        content: Text(
+                                            'Movie successfully deleted!'.tr()),
                                       ),
                                     );
                                   });

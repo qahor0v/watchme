@@ -31,9 +31,9 @@ class _CartoonsReelsState extends State<CartoonsReels> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Cartoons",
-                  style: TextStyle(
+                Text(
+                  "Cartoons".tr(),
+                  style:const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,

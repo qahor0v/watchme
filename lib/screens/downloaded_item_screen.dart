@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_me/models/history_model.dart';
 import 'package:watch_me/models/movie_model.dart';
@@ -104,9 +105,9 @@ class DownloadedItem extends StatelessWidget {
                         onTap: () {
                           Preference.deleteMovie(movie);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                             SnackBar(
                               backgroundColor: Colors.red,
-                              content: Text('Movie successfully deleted!'),
+                              content: Text('Movie successfully deleted!'.tr()),
                             ),
                           );
                         },

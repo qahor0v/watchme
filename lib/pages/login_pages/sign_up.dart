@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, file_names
 import 'dart:async';
 import 'dart:ui';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -161,13 +162,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       child:Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(left: 16.0, top: 10),
+                           Padding(
+                            padding: const EdgeInsets.only(left: 16.0, top: 10),
                             child: Text(
-                              "Sign Up",
-                              style: TextStyle(
+                              "signup".tr(),
+                              style:const TextStyle(
                                 color: Colors.white,
-                                fontSize: 40,
+                                fontSize: 32,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -239,7 +240,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       ),
                                       textInputAction: TextInputAction.done,
                                       decoration: InputDecoration(
-                                        hintText: "FullName",
+                                        hintText: "FirstName".tr(),
                                         border: InputBorder.none,
                                         hintStyle: TextStyle(
                                           fontSize: 17,
@@ -270,7 +271,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       ),
                                       textInputAction: TextInputAction.done,
                                       decoration: InputDecoration(
-                                        hintText: "Email",
+                                        hintText: "Email".tr(),
                                         border: InputBorder.none,
                                         hintStyle: TextStyle(
                                           fontSize: 17,
@@ -318,7 +319,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                             color: Colors.grey,
                                           ),
                                         ),
-                                        hintText: "Password",
+                                        hintText: "Password".tr(),
                                         border: InputBorder.none,
                                         hintStyle: TextStyle(
                                           fontSize: 17,
@@ -350,7 +351,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       ),
                                       textInputAction: TextInputAction.done,
                                       decoration: InputDecoration(
-                                        hintText: "Confirm password",
+                                        hintText: "confirm".tr(),
                                         // suffixIcon: IconButton(
                                         //   onPressed: () {
                                         //     setState(() {
@@ -389,9 +390,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                       onPressed: () {
                                         signUp();
                                       },
-                                      child: const Text(
-                                        "Continue",
-                                        style: TextStyle(
+                                      child:  Text(
+                                        "Continue".tr(),
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.white,
                                         ),
@@ -408,9 +409,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        const Text(
-                                          "Already have an account?",
-                                          style: TextStyle(
+                                         Text(
+                                          "have_account".tr(),
+                                          style: const TextStyle(
                                             fontSize: 15,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600,
@@ -426,9 +427,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                               SignInPage.id,
                                             );
                                           },
-                                          child: const Text(
-                                            "Sign In",
-                                            style: TextStyle(
+                                          child:  Text(
+                                            "signin".tr(),
+                                            style:const TextStyle(
                                               fontSize: 15,
                                               color: Colors.red,
                                               fontWeight: FontWeight.w600,

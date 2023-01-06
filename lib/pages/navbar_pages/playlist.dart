@@ -77,15 +77,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
         ),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: movies.isEmpty
-              ? const Center(
-                  child: Icon(
-                    Icons.not_interested,
-                    color: Colors.white,
-                    size: 70,
-                  ),
-                )
-              : ListView.builder(
+          child: ListView.builder(
                   itemCount: movies.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
@@ -213,9 +205,9 @@ class _PlaylistPageState extends State<PlaylistPage> {
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
-                                                      const SnackBar(
+                                                       SnackBar(
                                                         content: Text(
-                                                          'Movie successfully deleted!',
+                                                          'Movie successfully deleted!'.tr(),
                                                         ),
                                                         backgroundColor:
                                                             Colors.red,

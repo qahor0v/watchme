@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/pages/language_page.dart';
@@ -86,9 +87,10 @@ class _AccountState extends State<Account> {
                   SizedBox(
                     height: height * 0.2,
                     width: height * 0.2,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(height * 0.2),
-                      child: Image.asset("assets/images/user.png"),
+                    child: Icon(
+                      Icons.account_circle,
+                      size: height * 0.2,
+                      color: Colors.grey,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -114,15 +116,6 @@ class _AccountState extends State<Account> {
                             fontSize: 16,
                           ),
                         ),
-
-                  // const Text(
-                  //   "mail@gmail.com",
-                  //   style: TextStyle(
-                  //     color: Colors.white70,
-                  //     fontWeight: FontWeight.w700,
-                  //     fontSize: 16,
-                  //   ),
-                  // ),
                   const SizedBox(height: 8),
                   widgetTile(
                     height,
@@ -140,13 +133,78 @@ class _AccountState extends State<Account> {
                     Icons.history,
                     openHistory,
                   ),
-                  widgetTile(
-                    height,
-                    width,
-                    context,
-                    "Settings".tr(),
-                    Icons.settings,
-                    null,
+                  // widgetTile(
+                  //   height,
+                  //   width,
+                  //   context,
+                  //   "Exit".tr(),
+                  //   IconlyLight.logout,
+                  //   signOut,
+                  // ),
+                  GestureDetector(
+                    onLongPress: () {
+                      showBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: MaterialButton(
+                                onLongPress: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const ChangeAppbarIndex(),
+                                    ),
+                                  );
+                                },
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  "WatchMe!",
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 20),
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                    onTap: () {
+                      signOut(context);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        left: 36,
+                        right: 36,
+                        top: 8,
+                        bottom: 8,
+                      ),
+                      height: height * 0.08,
+                      width: width,
+                      decoration: BoxDecoration(
+                        color: Colors.white10,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(IconlyLight.logout,
+                                color: Colors.red, size: 30),
+                            const SizedBox(width: 8),
+                            Text(
+                              "Exit".tr(),
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

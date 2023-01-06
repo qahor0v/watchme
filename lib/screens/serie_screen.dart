@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,7 @@ class _SerieScreenState extends State<SerieScreen> {
           IconButton(
             onPressed: () async {
               await Share.share(
-                  '${widget.serie.name} \nYear: ${widget.serie.year} | Rating: ${widget.serie.rating}\n\nWatch in WatchMe! \nhttps://fluttuz.t.me');
+                  '${widget.serie.name} \nYear: ${widget.serie.year} | Rating: ${widget.serie.rating}\n\nWatch in WatchMe! \nhttps://play.google.com/store/apps/details?id=com.watch.me');
             },
             icon: const Icon(
               Icons.share,
@@ -101,12 +102,12 @@ class _SerieScreenState extends State<SerieScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             infoWidget(Icons.local_movies_rounded,
-                                "Season ${widget.serie.season}"),
+                                "${"Season".tr()} ${widget.serie.season}"),
                             infoWidget(Icons.calendar_month, widget.serie.year),
                             infoWidget(
                                 Icons.star, widget.serie.rating.toString()),
                             infoWidget(Icons.video_collection_outlined,
-                                "${widget.serie.videoUrls.length} Episode"),
+                                "${widget.serie.videoUrls.length} ${"episode".tr()}"),
                             infoWidget(
                               Icons.movie_creation_outlined,
                               genre,
@@ -138,8 +139,8 @@ class _SerieScreenState extends State<SerieScreen> {
                     const SizedBox(width: 5),
                     Text(
                       showInfo
-                          ? "Close"
-                          : """More info about "${widget.serie.name}\"""",
+                          ? "Close".tr()
+                          : "About".tr(),
                       style: const TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.bold,
@@ -175,7 +176,7 @@ class _SerieScreenState extends State<SerieScreen> {
                   onTap: () {
                     var movie = HistoryModel(
                       id: "${widget.serie.name}id",
-                      name: "${widget.serie.name} | Chapter ${index+1}",
+                      name: "${widget.serie.name} | ${"Episode".tr()} ${index+1}",
                       path: 'null',
                       url: widget.serie.videoUrls[index],
                       imgUrl: widget.serie.imgUrl,
@@ -217,7 +218,7 @@ class _SerieScreenState extends State<SerieScreen> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          "Chapter ${index + 1}",
+                          "${"Episode".tr()} ${index + 1}",
                           style: const TextStyle(
                             fontSize: 20,
                             color: Colors.white60,

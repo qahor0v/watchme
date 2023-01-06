@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
@@ -196,14 +197,15 @@ class _CartoonScreenState extends State<CartoonScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Row(
-                                children: const [
-                                  Icon(
+                                children:  [
+                                  const Icon(
                                     Icons.info_outline,
                                     color: Colors.red,
                                   ),
+                                  const SizedBox(width: 6),
                                   Text(
-                                    " About ",
-                                    style: TextStyle(
+                                    "About".tr(),
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
                                       color: Colors.white,
@@ -234,8 +236,8 @@ class _CartoonScreenState extends State<CartoonScreen> {
                                           backgroundColor: Colors.green,
                                           content: Text(
                                             res
-                                                ? 'Movie successfully added to downloads'
-                                                : "Already in progress or multiple movies are being downloaded",
+                                                ? 'Movie successfully added to downloads'.tr()
+                                                : "Already in progress or multiple movies are being downloaded".tr(),
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w900,
@@ -253,7 +255,7 @@ class _CartoonScreenState extends State<CartoonScreen> {
                                   IconButton(
                                     onPressed: () async {
                                       await Share.share(
-                                          '${widget.cartoon.name} \nYear: ${widget.cartoon.year} | Rating: ${widget.cartoon.rating}\n\nWatch in WatchMe! \nhttps://fluttuz.t.me');
+                                          '${widget.cartoon.name} \nYear: ${widget.cartoon.year} | Rating: ${widget.cartoon.rating}\n\nWatch in WatchMe! \nhttps://play.google.com/store/apps/details?id=com.watch.me');
                                     },
                                     icon: const Icon(
                                       Icons.share,
@@ -298,14 +300,14 @@ class _CartoonScreenState extends State<CartoonScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(
+                   Padding(
+                    padding:const EdgeInsets.only(
                       left: 16,
                       bottom: 12,
                     ),
                     child: Text(
-                      "Recommended",
-                      style: TextStyle(
+                      "Recommended".tr(),
+                      style:const TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.w800,
                         fontSize: 20,

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
@@ -182,14 +183,15 @@ class _MovieScreenState extends State<MovieScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Row(
-                                children: const [
-                                  Icon(
+                                children: [
+                                  const Icon(
                                     Icons.info_outline,
                                     color: Colors.red,
                                   ),
+                                  const SizedBox(width: 6),
                                   Text(
-                                    " About ",
-                                    style: TextStyle(
+                                    "About".tr(),
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
                                       color: Colors.white,
@@ -210,7 +212,9 @@ class _MovieScreenState extends State<MovieScreen> {
                                           content: Text(
                                             res
                                                 ? 'Movie successfully added to downloads'
-                                                : "Already in progress or multiple movies are being downloaded",
+                                                    .tr()
+                                                : "Already in progress or multiple movies are being downloaded"
+                                                    .tr(),
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w900,
@@ -226,9 +230,9 @@ class _MovieScreenState extends State<MovieScreen> {
                                     ),
                                   ),
                                   IconButton(
-                                    onPressed: () async  {
+                                    onPressed: () async {
                                       await Share.share(
-                                          '${widget.movie.name} \nYear: ${widget.movie.year} | Rating: ${widget.movie.rating}\n\nWatch in WatchMe! \nhttps://fluttuz.t.me');
+                                          '${widget.movie.name} \nYear: ${widget.movie.year} | Rating: ${widget.movie.rating}\n\nWatch in WatchMe! \nhttps://play.google.com/store/apps/details?id=com.watch.me');
                                     },
                                     icon: const Icon(
                                       Icons.share,
@@ -273,14 +277,14 @@ class _MovieScreenState extends State<MovieScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(
+                  Padding(
+                    padding: const EdgeInsets.only(
                       left: 16,
                       bottom: 12,
                     ),
                     child: Text(
-                      "Recommended",
-                      style: TextStyle(
+                      "Recommended".tr(),
+                      style: const TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.w800,
                         fontSize: 20,
@@ -291,114 +295,125 @@ class _MovieScreenState extends State<MovieScreen> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                       if(context.watch<MoviesProvider>().movies[index].name != widget.movie.name){
-                         return GestureDetector(
-                           onTap: (){
-                             Navigator.pushReplacement(
-                               context,
-                               MaterialPageRoute(
-                                 builder: (_) => MovieScreen(
-                                   movie: context
-                                       .watch<MoviesProvider>()
-                                       .movies[index],
-                                 ),
-                               ),
-                             );
-                           },
-                           child: Container(
-                             margin: EdgeInsets.only(
-                               left: index == 0 ? 16 : 8,
-                               right: 8,
-                             ),
-                             //height: height * 0.3,
-                             width: MediaQuery.of(context).size.width * 0.32,
-                             decoration: BoxDecoration(
-                               color: Colors.black54,
-                               borderRadius: BorderRadius.circular(12),
-                             ),
-                             child: Stack(
-                               children: [
-                                 Center(
-                                   child: ClipRRect(
-                                     borderRadius: BorderRadius.circular(12),
-                                     child: CachedNetworkImage(
-                                       height: height * 0.35,
-                                       fit: BoxFit.cover,
-                                       imageUrl: context
-                                           .watch<MoviesProvider>()
-                                           .movies[index]
-                                           .imgUrl,
-                                       placeholder: (context, url) =>
-                                           Loading.loading(),
-                                       errorWidget: (context, url, error) =>
-                                       const Icon(
-                                         Icons.movie,
-                                         size: 50,
-                                         color: Colors.red,
-                                       ),
-                                     ),
-                                   ),
-                                 ),
-                                 Column(
-                                   mainAxisAlignment: MainAxisAlignment.end,
-                                   children: [
-                                     SizedBox(
-                                       height: height * 0.3,
-                                       width: MediaQuery.of(context).size.width *
-                                           0.32,
-                                       child: Column(
-                                         mainAxisAlignment: MainAxisAlignment.end,
-                                         //  crossAxisAlignment: CrossAxisAlignment.end,
-                                         children: [
-                                           ClipRRect(
-                                             borderRadius: const BorderRadius.only(
-                                               bottomRight: Radius.circular(12),
-                                               bottomLeft: Radius.circular(12),
-                                             ),
-                                             child: BackdropFilter(
-                                               filter: ImageFilter.blur(
-                                                 sigmaX: 15,
-                                                 sigmaY: 15,
-                                               ),
-                                               child: Center(
-                                                 child: Padding(
-                                                   padding: const EdgeInsets.only(
-                                                     left: 3,
-                                                     right: 3,
-                                                     top: 4,
-                                                     bottom: 4,
-                                                   ),
-                                                   child: Text(
-                                                     context
-                                                         .watch<MoviesProvider>()
-                                                         .movies[index]
-                                                         .name,
-                                                     textAlign: TextAlign.center,
-                                                     style: const TextStyle(
-                                                       color: Colors.white,
-                                                       fontWeight: FontWeight.w600,
-                                                       fontSize: 15,
-                                                     ),
-                                                   ),
-                                                 ),
-                                               ),
-                                             ),
-                                           ),
-                                         ],
-                                       ),
-                                     ),
-                                   ],
-                                 ),
-                               ],
-                             ),
-                           ),
-                         );
-                       } else {
-                         return const SizedBox.shrink();
-                       }
+                        if (context
+                                .watch<MoviesProvider>()
+                                .movies[index]
+                                .name !=
+                            widget.movie.name) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => MovieScreen(
+                                    movie: context
+                                        .watch<MoviesProvider>()
+                                        .movies[index],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                left: index == 0 ? 16 : 8,
+                                right: 8,
+                              ),
+                              //height: height * 0.3,
+                              width: MediaQuery.of(context).size.width * 0.32,
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: CachedNetworkImage(
+                                        height: height * 0.35,
+                                        fit: BoxFit.cover,
+                                        imageUrl: context
+                                            .watch<MoviesProvider>()
+                                            .movies[index]
+                                            .imgUrl,
+                                        placeholder: (context, url) =>
+                                            Loading.loading(),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(
+                                          Icons.movie,
+                                          size: 50,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      SizedBox(
+                                        height: height * 0.3,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.32,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          //  crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(12),
+                                                bottomLeft: Radius.circular(12),
+                                              ),
+                                              child: BackdropFilter(
+                                                filter: ImageFilter.blur(
+                                                  sigmaX: 15,
+                                                  sigmaY: 15,
+                                                ),
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      left: 3,
+                                                      right: 3,
+                                                      top: 4,
+                                                      bottom: 4,
+                                                    ),
+                                                    child: Text(
+                                                      context
+                                                          .watch<
+                                                              MoviesProvider>()
+                                                          .movies[index]
+                                                          .name,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox.shrink();
+                        }
                       },
-                      itemCount:
-                          context.watch<MoviesProvider>().movies.length,
+                      itemCount: context.watch<MoviesProvider>().movies.length,
                     ),
                   )
                 ],

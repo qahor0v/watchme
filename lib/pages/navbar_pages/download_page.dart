@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/models/movie_model.dart';
 import 'package:watch_me/providers/download_manager.dart';
@@ -77,15 +76,7 @@ class _DownloadPageState extends State<DownloadPage> {
             stream: DownloadManager.instance.onUpdate.stream,
             builder: (context, snapshot) {
               log('Progress updated: movie length: ${DownloadManager.instance.movies.length}');
-              return movies.isEmpty
-                  ? const Center(
-                      child: Icon(
-                        Icons.not_interested,
-                        color: Colors.white,
-                        size: 70,
-                      ),
-                    )
-                  : CustomScrollView(
+              return CustomScrollView(
                       slivers: [
                         SliverList(
                           delegate: SliverChildBuilderDelegate(

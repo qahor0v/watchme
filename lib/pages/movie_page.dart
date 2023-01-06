@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
@@ -258,14 +259,15 @@ class _MoviePageState extends State<MoviePage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Row(
-                                children: const [
-                                  Icon(
+                                children: [
+                                  const Icon(
                                     Icons.info_outline,
                                     color: Colors.red,
                                   ),
+                                  const SizedBox(width: 6),
                                   Text(
-                                    " About ",
-                                    style: TextStyle(
+                                    "About".tr(),
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
                                       color: Colors.white,
@@ -301,8 +303,8 @@ class _MoviePageState extends State<MoviePage> {
                                           backgroundColor: Colors.green,
                                           content: Text(
                                             res
-                                                ? 'Movie successfully added to downloads'
-                                                : "Already in progress or multiple movies are being downloaded",
+                                                ? 'Movie successfully added to downloads'.tr()
+                                                : "Already in progress or multiple movies are being downloaded".tr(),
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w900,
@@ -320,7 +322,7 @@ class _MoviePageState extends State<MoviePage> {
                                   IconButton(
                                     onPressed: () async {
                                       await Share.share(
-                                          '${widget.movie.map['movie']['name']} \nYear: ${widget.movie.map['movie']['year']} | Rating: ${widget.movie.map['movie']['rating']}\n\nWatch in WatchMe! \nhttps://fluttuz.t.me');
+                                          '${widget.movie.map['movie']['name']} \nYear: ${widget.movie.map['movie']['year']} | Rating: ${widget.movie.map['movie']['rating']}\n\nWatch in WatchMe! \nhttps://play.google.com/store/apps/details?id=com.watch.me');
                                     },
                                     icon: const Icon(
                                       Icons.share,
@@ -365,14 +367,14 @@ class _MoviePageState extends State<MoviePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(
+                  Padding(
+                    padding: const EdgeInsets.only(
                       left: 16,
                       bottom: 12,
                     ),
                     child: Text(
-                      "Recommended",
-                      style: TextStyle(
+                      "Recommended".tr(),
+                      style: const TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.w800,
                         fontSize: 20,

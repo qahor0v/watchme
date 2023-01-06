@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:watch_me/providers/movies_provider.dart';
@@ -16,7 +17,7 @@ class AllCartoons extends StatelessWidget {
       backgroundColor: const Color(0xff38404b).withOpacity(0.8),
       appBar: AppBar(
         backgroundColor: const Color(0xff38404b),
-        title: const Text("All Cartoons"),
+        title: Text("Cartoons".tr()),
       ),
       body: Container(
         decoration: const BoxDecoration(

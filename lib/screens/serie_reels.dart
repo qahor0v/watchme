@@ -31,9 +31,9 @@ class _SerieReelsState extends State<SerieReels> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Series",
-                  style: TextStyle(
+                Text(
+                  "Series".tr(),
+                  style:const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -124,13 +125,13 @@ class _SignInPageState extends State<SignInPage> {
                       child:Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(
+                           Padding(
+                            padding: const EdgeInsets.only(
                               left: 16, top: 12,
                             ),
                             child: Text(
-                              "Hi!",
-                              style: TextStyle(
+                              "signin".tr(),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 35,
                                 fontWeight: FontWeight.bold,
@@ -177,7 +178,7 @@ class _SignInPageState extends State<SignInPage> {
                                       ),
                                       textInputAction: TextInputAction.done,
                                       decoration: InputDecoration(
-                                        hintText: "Email",
+                                        hintText: "Email".tr(),
                                         border: InputBorder.none,
                                         hintStyle: TextStyle(
                                           fontSize: 17,
@@ -224,7 +225,7 @@ class _SignInPageState extends State<SignInPage> {
                                               Icons.visibility,
                                               color: Colors.grey,
                                             )),
-                                        hintText: "Password",
+                                        hintText: "Password".tr(),
                                         border: InputBorder.none,
                                         hintStyle: TextStyle(
                                           fontSize: 17,
@@ -250,9 +251,9 @@ class _SignInPageState extends State<SignInPage> {
                                       onPressed: () {
                                         signIn();
                                       },
-                                      child: const Text(
-                                        "Continue",
-                                        style: TextStyle(
+                                      child:  Text(
+                                        "Continue".tr(),
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.white,
                                         ),
@@ -269,9 +270,9 @@ class _SignInPageState extends State<SignInPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        const Text(
-                                          "Don't have an account?",
-                                          style: TextStyle(
+                                        Text(
+                                          "no_account".tr(),
+                                          style:const TextStyle(
                                             fontSize: 15,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600,
@@ -287,9 +288,9 @@ class _SignInPageState extends State<SignInPage> {
                                               SignUpPage.id,
                                             );
                                           },
-                                          child: const Text(
-                                            "Sign Up",
-                                            style: TextStyle(
+                                          child:  Text(
+                                            "signup".tr(),
+                                            style: const TextStyle(
                                               fontSize: 15,
                                               color: Colors.red,
                                               fontWeight: FontWeight.w600,

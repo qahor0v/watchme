@@ -115,6 +115,10 @@ class _StartPageState extends State<StartPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const SizedBox(
+                height: 12,
+              ),
+
               ///arrow container
               Container(
                   padding: const EdgeInsets.all(10),
@@ -122,13 +126,13 @@ class _StartPageState extends State<StartPage> {
                     border: Border.all(color: Colors.white38, width: 2),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: IconButton(
-                    icon: const Icon(
+                  child: GestureDetector(
+                    child: const Icon(
                       IconlyBold.arrow_right_3,
                       size: 25,
                       color: Colors.white,
                     ),
-                    onPressed: () {
+                    onTap: () {
                       if (pIndex < 3) {
                         setState(() {
                           pIndex++;
@@ -155,7 +159,7 @@ class _StartPageState extends State<StartPage> {
               ),
 
               Text(
-                "See what's next.",
+                "See what's next".tr(),
                 style: GoogleFonts.aBeeZee(
                   fontSize: 22,
                   color: Colors.white,
@@ -168,10 +172,10 @@ class _StartPageState extends State<StartPage> {
 
               Container(
                 padding: const EdgeInsets.only(left: 20, right: 20),
-                child: const Text(
-                  "WatchMe shows movies and series anytime anywhere and whenever you want.",
+                child: Text(
+                  "about".tr(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xff757c86),
                     fontSize: 16,
                   ),
@@ -188,8 +192,9 @@ class _StartPageState extends State<StartPage> {
                         Navigator.pushReplacementNamed(context, SignUpPage.id);
                       },
                       child: Container(
+                        padding: const EdgeInsets.only(left: 28, right: 28),
                         height: height * 0.08,
-                        width: width * 0.2,
+                        //width: width * 0.2,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
@@ -197,14 +202,17 @@ class _StartPageState extends State<StartPage> {
                             color: Colors.white38,
                           ),
                         ),
-                        child: const Center(
-                            child: Text(
-                          "Sign Up",
-                          style: TextStyle(
+                        child: Center(
+                          child: Text(
+                            "signup".tr(),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        )),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     //SignIN
@@ -213,20 +221,22 @@ class _StartPageState extends State<StartPage> {
                         Navigator.pushReplacementNamed(context, SignInPage.id);
                       },
                       child: Container(
+                        padding: const EdgeInsets.only(left: 32, right: 32),
                         height: height * 0.08,
-                        width: width * 0.2,
+                       // width: width * 0.2,
                         decoration: BoxDecoration(
                           color: Colors.red.withOpacity(0.6),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: const Center(
-                            child: Text(
-                          "Sign In",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        )),
+                        child: Center(
+                          child: Text(
+                            "signin".tr(),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -298,7 +308,7 @@ class _PageViewWidgetState extends State<PageViewWidget> {
     "assets/images/img_3.png",
     "assets/images/img_2.png",
   ];
-  List nameofmov = ["Wednesday","Red Notice", "Top Gun: Maverick"];
+  List nameofmov = ["Wednesday", "Red Notice", "Top Gun: Maverick"];
 
   @override
   Widget build(BuildContext context) {
@@ -377,4 +387,4 @@ class _PageViewWidgetState extends State<PageViewWidget> {
 }
 
 const trLang = ['en', 'uz', 'ru'];
-const tRLang = ['EN', 'UZ', 'BL'];
+const tRLang = ['US', 'UZ', 'BL'];

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_me/models/movie_model.dart';
 import 'package:watch_me/providers/download_manager.dart';
@@ -95,9 +96,9 @@ class DownloadItemScreen extends StatelessWidget {
                             DownloadManager.instance
                                 .cancelDownloading(movie);
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
+                               SnackBar(
                                 backgroundColor: Colors.red,
-                                content: Text('Movie downloading canceled!'),
+                                content: Text('Movie downloading canceled!'.tr()),
                               ),
                             );
                           },
