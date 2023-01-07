@@ -6,21 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/models/movie_model.dart';
+import 'package:watch_me/pages/lottie_page.dart';
 import 'package:watch_me/providers/download_manager.dart';
 import 'package:watch_me/screens/downloaded_item_screen.dart';
 
 import '../../screens/download_item_screen.dart';
 
-class DownloadPage extends StatefulWidget {
+class OfflinePage extends StatefulWidget {
   static const String id = "s34c5t9342";
 
-  const DownloadPage({Key? key}) : super(key: key);
+  const OfflinePage({Key? key}) : super(key: key);
 
   @override
-  State<DownloadPage> createState() => _DownloadPageState();
+  State<OfflinePage> createState() => _OfflinePageState();
 }
 
-class _DownloadPageState extends State<DownloadPage> {
+class _OfflinePageState extends State<OfflinePage> {
   List<MovieModel> movies = [];
 
   Future<void> getSavedMovies() async {
@@ -53,9 +54,25 @@ class _DownloadPageState extends State<DownloadPage> {
     return Scaffold(
       backgroundColor: const Color(0xff38404b).withOpacity(0.8),
       appBar: AppBar(
-        title: Text("Downloads".tr()),
-        centerTitle: true,
+        title: Text("Not internet connection".tr()),
         backgroundColor: const Color(0xff38404b),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const LottiePage(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(width: 8)
+        ],
       ),
       body: Container(
         decoration: const BoxDecoration(

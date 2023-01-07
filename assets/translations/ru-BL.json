@@ -35,5 +35,6 @@
   "Movie successfully deleted!": "Фильм успешно удален!",
   "Movie downloading canceled!": "Загрузка фильма отменена!",
   "Movie successfully added your favorites!": "Фильм успешно добавлен в избранное!",
-  "Movie successfully deleted your favorites!": "Фильм успешно удален из избранного!"
+  "Movie successfully deleted your favorites!": "Фильм успешно удален из избранного!",
+  "Not internet connection": "Нет подключения к интернету"
 }

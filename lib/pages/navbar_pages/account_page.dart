@@ -43,6 +43,7 @@ class _AccountState extends State<Account> {
     prefs.remove("email");
     prefs.remove("password");
     prefs.remove("logged");
+    prefs.remove('history');
     // ignore: use_build_context_synchronously
     Navigator.pushReplacementNamed(context, StartPage.id);
   }

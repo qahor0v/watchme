@@ -1,12 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firedart/auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/pages/home_page.dart';
 import 'package:watch_me/pages/navbar_pages/download_page.dart';
+import 'package:watch_me/pages/secret/offline.dart';
 
 class LottiePage extends StatefulWidget {
   static const String id = "lottie_page";
@@ -34,13 +36,17 @@ class _LottiePageState extends State<LottiePage> {
     } on SocketException catch (_) {
       log('not connected');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('A SnackBar has been shown.'),
+        SnackBar(
+          content: Text("Not internet connection".tr()),
         ),
       );
-      Navigator.pushReplacementNamed(context, DownloadPage.id);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const OfflinePage(),
+        ),
+      );
     }
-
   }
 
   @override

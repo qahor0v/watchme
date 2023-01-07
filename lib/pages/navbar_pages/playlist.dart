@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_me/pages/movie_page.dart';
 import 'package:watch_me/screens/loading_widget.dart';
@@ -77,7 +78,15 @@ class _PlaylistPageState extends State<PlaylistPage> {
         ),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: ListView.builder(
+          child:movies.isEmpty?Center(
+            child: SizedBox(
+              height: 300,
+              width: 300,
+              child: Lottie.asset(
+                'assets/lotties/empty.json',
+              ),
+            ),
+          ): ListView.builder(
                   itemCount: movies.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(

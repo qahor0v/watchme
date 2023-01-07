@@ -35,5 +35,6 @@
   "Movie successfully deleted!": "Movie successfully deleted!",
   "Movie downloading canceled!": "Movie downloading canceled!",
   "Movie successfully added your favorites!": "Movie successfully added your favorites!",
-  "Movie successfully deleted your favorites!": "Movie successfully deleted your favorites!"
+  "Movie successfully deleted your favorites!": "Movie successfully deleted your favorites!",
+  "Not internet connection": "Not internet connection"
 }

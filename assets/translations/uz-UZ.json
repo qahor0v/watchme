@@ -35,5 +35,6 @@
   "Movie successfully deleted!": "Film o'chirildi!",
   "Movie downloading canceled!": "Filmni yuklash bekor qilindi!",
   "Movie successfully added your favorites!": "Film sevimlilarga qo'shildi!",
-  "Movie successfully deleted your favorites!": "Film sevimlilardan o'chirildi!"
+  "Movie successfully deleted your favorites!": "Film sevimlilardan o'chirildi!",
+  "Not internet connection": "Internetga ulanmagan"
 }
